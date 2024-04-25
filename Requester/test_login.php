@@ -1,3 +1,6 @@
+<!-- without password logic -->
+
+<!-- hashed password logic -->
 <?php
 include('../dbConnection.php');
 session_start();
@@ -73,13 +76,8 @@ if (!isset($_SESSION['is_login'])) {
             <small class="form-text">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
-            <i class="fas fa-key"></i><label for="pass" class="pl-2 font-weight-bold">Password</label>
-            <div class="input-group">
-              <input type="password" class="form-control" placeholder="Password" name="rPassword" id="passwordInput">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="showPasswordButton">Show</button>
-              </div>
-            </div>
+            <i class="fas fa-key"></i><label for="pass" class="pl-2 font-weight-bold">Password</label><input type="password"
+              class="form-control" placeholder="Password" name="rPassword">
           </div>
           <button type="submit" class="btn btn-outline-danger mt-3 btn-block shadow-sm font-weight-bold">Login</button>
           <?php if(isset($msg)) {echo $msg; } ?>
@@ -95,22 +93,6 @@ if (!isset($_SESSION['is_login'])) {
   <script src="../js/popper.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script src="../js/all.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const passwordInput = document.getElementById('passwordInput');
-      const showPasswordButton = document.getElementById('showPasswordButton');
-
-      showPasswordButton.addEventListener('click', function () {
-        if (passwordInput.type === 'password') {
-          passwordInput.type = 'text';
-          showPasswordButton.textContent = 'Hide';
-        } else {
-          passwordInput.type = 'password';
-          showPasswordButton.textContent = 'Show';
-        }
-      });
-    });
-  </script>
 </body>
 
 </html>

@@ -62,15 +62,18 @@ if (isset($_REQUEST['passupdate'])) {
         </div>
         <div class="form-group">
           <label for="inputnewpassword">New Password</label>
-          <input type="password" class="form-control" id="inputnewpassword" placeholder="New Password" name="rPassword">
+          <div class="input-group">
+            <input type="password" class="form-control" id="inputnewpassword" placeholder="New Password" name="rPassword">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="showPasswordButton">Show</button>
+            </div>
+          </div>
         </div>
         <button type="submit" class="btn btn-danger mr-4 mt-4" name="passupdate">Update</button>
         <button type="reset" class="btn btn-secondary mt-4">Reset</button>
         <?php if(isset($passmsg)) {echo $passmsg; } ?>
       </form>
-
     </div>
-
   </div>
 </div>
 </div>
@@ -79,3 +82,20 @@ if (isset($_REQUEST['passupdate'])) {
 <?php
 include('includes/footer.php'); 
 ?>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const newPasswordInput = document.getElementById('inputnewpassword');
+    const showPasswordButton = document.getElementById('showPasswordButton');
+
+    showPasswordButton.addEventListener('click', function () {
+      if (newPasswordInput.type === 'password') {
+        newPasswordInput.type = 'text';
+        showPasswordButton.textContent = 'Hide';
+      } else {
+        newPasswordInput.type = 'password';
+        showPasswordButton.textContent = 'Show';
+      }
+    });
+  });
+</script>
