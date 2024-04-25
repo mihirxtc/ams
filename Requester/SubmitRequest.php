@@ -60,7 +60,7 @@ if(isset($_REQUEST['submitrequest'])){
     </div>
     <div class="form-group">
       <label for="inputName">Name</label>
-      <input type="text" class="form-control" id="inputName" placeholder="Rahul" name="requestername">
+      <input type="text" class="form-control" id="inputName" placeholder="Your Name" name="requestername">
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
