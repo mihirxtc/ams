@@ -18,35 +18,29 @@ if (isset($_REQUEST['passupdate'])) {
     // msg displayed if required field missing
     $passmsg = '<div class="alert alert-warning col-sm-6 ml-5 mt-2" role="alert"> Fill All Fields </div>';
   } else {
-    // Password Validation
-    $password = $_REQUEST['rPassword'];
-    if(strlen($password) < 8 || !preg_match("#[0-9]+#", $password) || !preg_match("#[a-zA-Z]+#", $password) || !preg_match("#[^\w]+#", $password)) {
-        $passmsg = '<div class="alert alert-warning col-sm-6 ml-5 mt-2" role="alert">Password must be at least 8 characters long and contain at least one number, one letter (uppercase or lowercase), and one special character.</div>';
-    } else {
-        $sql = "SELECT * FROM requesterlogin_tb WHERE r_email='$rEmail'";
-        $result = $conn->query($sql);
+    $sql = "SELECT * FROM requesterlogin_tb WHERE r_email='$rEmail'";
+    $result = $conn->query($sql);
 
-        if ($result->num_rows == 1) {
-          $rPassword = $_REQUEST['rPassword'];
-          $hashPassword = password_hash($rPassword, PASSWORD_DEFAULT); // Hash password
+    if ($result->num_rows == 1) {
+      $rPassword = $_REQUEST['rPassword'];
+      $hashPassword = password_hash($rPassword, PASSWORD_DEFAULT); // Hash password
 
-          $sql = "UPDATE requesterlogin_tb SET r_password = ? WHERE r_email = ?";
-          $stmt = $conn->prepare($sql);
+      $sql = "UPDATE requesterlogin_tb SET r_password = ? WHERE r_email = ?";
+      $stmt = $conn->prepare($sql);
 
-          // Bind parameters securely
-          $stmt->bind_param("ss", $hashPassword, $rEmail);
+      // Bind parameters securely
+      $stmt->bind_param("ss", $hashPassword, $rEmail);
 
-          if ($stmt->execute()) {
-            // below msg display on form submit success
-            $passmsg = '<div class="alert alert-success col-sm-6 ml-5 mt-2" role="alert"> Updated Successfully </div>';
-          } else {
-            // below msg display on form submit failed
-            $passmsg = '<div class="alert alert-danger col-sm-6 ml-5 mt-2" role="alert"> Unable to Update </div>';
-          }
+      if ($stmt->execute()) {
+        // below msg display on form submit success
+        $passmsg = '<div class="alert alert-success col-sm-6 ml-5 mt-2" role="alert"> Updated Successfully </div>';
+      } else {
+        // below msg display on form submit failed
+        $passmsg = '<div class="alert alert-danger col-sm-6 ml-5 mt-2" role="alert"> Unable to Update </div>';
+      }
 
-          // Close the statement (optional, but good practice)
-          $stmt->close();
-        }
+      // Close the statement (optional, but good practice)
+      $stmt->close();
     }
   }
 }

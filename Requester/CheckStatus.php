@@ -101,7 +101,7 @@ if($_SESSION['is_login']){
       </tr>
       <tr>
         <td>Technician Name</td>
-        <td>Zahir Khan</td>
+        <td></td>
       </tr>
       <tr>
         <td>Customer Sign</td>
